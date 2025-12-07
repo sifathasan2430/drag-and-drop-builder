@@ -1,6 +1,6 @@
 "use client";
 import { act, useState } from "react";
-import { DndContext, MouseSensor, TouchSensor, useDraggable, useDroppable, useSensor, useSensors } from "@dnd-kit/core";
+import { DndContext, DragEndEvent, MouseSensor, TouchSensor, useDraggable, useDroppable, useSensor, useSensors } from "@dnd-kit/core";
 import {
   SortableContext,
   useSortable,
@@ -59,17 +59,20 @@ export default function App() {
         {
           id: "col1",
           type: "column",
+          size: 33.33,
           children: [],
         },
         {
           id: "col2",
           type: "column",
+          size: 33.33,
           children: [],
         },
         {
           id: "col3",
           type: "column",
           children: [],
+          size: 33.33,
         },
       ],
     },
@@ -113,6 +116,7 @@ export default function App() {
           id: "col" + Math.random().toString(36).substr(2, 5),
           type: "column",
           children: [],
+          size: 33.33,
         });
 
         setLayout(newLayout);
@@ -289,7 +293,13 @@ export default function App() {
                           items={row.children}
                           strategy={verticalListSortingStrategy}
                         >
-                          {row.children.map((col) => (
+
+                       
+                          {row.children.map((col,index) => (
+                      
+            
+
+             
                             <Draggable
                               key={col.id}
                               id={col.id}
@@ -342,7 +352,10 @@ export default function App() {
                                 </Droppable>
                               </Sortable>
                             </Draggable>
+           
+                         
                           ))}
+                        
                         </SortableContext>
                       </div>
                     </div>
